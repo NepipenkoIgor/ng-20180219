@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+  <span>My Application</span>
+  <img [src]="logo" [style.width.px]="width" />
+  <mat-form-field >
+    <input matInput #myInput [placeholder]="placeholder"
+           (input)="onInput(myInput.value)">
+  </mat-form-field>
+</mat-toolbar>
