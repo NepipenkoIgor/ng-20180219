@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import debounce from '../decorators/debounce.decorator'
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  
   @Input()
   public placeholder;
 
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  @debounce(1000)
   public onInput(value: string): void {
     this.search.emit(value);
   }
