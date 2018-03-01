@@ -5,12 +5,14 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {MatInputModule, MatToolbarModule} from "@angular/material";
 import { HeaderComponent } from './header/header.component';
+import { UsersFilterPipe } from './common/pipes/users-filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    UsersFilterPipe
   ],
   imports: [
     BrowserModule, NoopAnimationsModule,

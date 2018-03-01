@@ -1,5 +1,14 @@
-<app-header [placeholder]="placeholder" (search)="search($event)">
+<app-header [placeholder]="placeholder" (search)="searchTerm = $event">
 
 </app-header>
 
-<h1>{{text}}</h1>
+<!--<pre>{{users$ | async | json}}</pre>-->
+<!--<pre>{{users | json }}</pre>-->
+<div *ngIf="users$ | async as users; else loadGif">
+  <div *ngFor="let user of users | usersFilter:searchTerm">{{user.firstName}}</div>
+</div>
+
+<ng-template #loadGif>
+  loading....
+</ng-template>
+
