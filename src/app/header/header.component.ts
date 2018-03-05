@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {UsersService} from '../users.service';
 
 
 export function debounce(ms: number) {
@@ -29,7 +30,8 @@ export function debounce(ms: number) {
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [UsersService]
 })
 export class HeaderComponent implements OnInit {
 

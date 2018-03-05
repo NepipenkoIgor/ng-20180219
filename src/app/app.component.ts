@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User, USERS, USERS$} from './users';
 import {Observable} from 'rxjs/Observable';
+import {UsersService} from './users.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public placeholder = 'Seatch people';
 
-  public users$: Observable<User[]> = USERS$;
+  public users$: Observable<User[]>;
+
+  public constructor(private _usersService: UsersService) {
+
+  }
 
 //  public users: any;
 //  public usersSubscription: Subscription;
@@ -21,12 +26,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.users$ = this._usersService.users$;
     // this.usersSubscription = this.users$.subscribe((users) => {
     //   this.users = users;
     // });
   }
 
   public ngOnDestroy() {
-   // this.usersSubscription.unsubscribe();
+    // this.usersSubscription.unsubscribe();
   }
 }

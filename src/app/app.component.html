@@ -5,7 +5,12 @@
 <!--<pre>{{users$ | async | json}}</pre>-->
 <!--<pre>{{users | json }}</pre>-->
 <div *ngIf="users$ | async as users; else loadGif">
-  <div *ngFor="let user of users | usersFilter:searchTerm">{{user.firstName}}</div>
+  <!--first/last/event/odd/index-->
+  <app-card *ngFor="let user of users | usersFilter:searchTerm;index as i; odd as isOdd"
+            [user]="user"
+            [position]="i+1"
+            [isOdd]="isOdd">
+  </app-card>
 </div>
 
 <ng-template #loadGif>
