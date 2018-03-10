@@ -7,7 +7,7 @@ import debounce from '../decorators/debounce.decorator'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+
   @Input()
   public placeholder;
 
