@@ -1,10 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {UsersService} from '../users.service';
 import debounce from '../decorators/debounce.decorator'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [UsersService]
 })
 export class HeaderComponent implements OnInit {
 
@@ -23,7 +26,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  @debounce(1000)
+
+  @debounce(300)
   public onInput(value: string): void {
     this.search.emit(value);
   }
