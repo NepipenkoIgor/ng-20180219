@@ -13,7 +13,7 @@ export class UsersService {
   }
 
   public get users$(): Observable<User[]> {
-    return this._http.get(`${this._baseUrl}participants?key=o5dpbb`);
+    return this._http.get<User[]>(`${this._baseUrl}participants?key=o5dpbb`);
   }
 
 }

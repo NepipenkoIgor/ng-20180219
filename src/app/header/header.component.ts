@@ -1,30 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {UsersService} from '../users.service';
-
-
-export function debounce(ms: number) {
-
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-
-    let timeoutId: number;
-    const originalMethod = descriptor.value;
-
-    /**
-     * TODO context
-     */
-    descriptor.value = function (...args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        originalMethod.apply(this, args);
-        timeoutId = null;
-      }, ms);
-
-    };
-
-    return descriptor;
-  };
-}
-
+import debounce from '../decorators/debounce.decorator'
 
 @Component({
   selector: 'app-header',
