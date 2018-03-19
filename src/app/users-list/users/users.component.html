@@ -1,0 +1,13 @@
+<div *ngIf="users$ | async as users; else loadGif">
+  <!--first/last/event/odd/index-->
+  <app-card *ngFor="let user of users | usersFilter:searchTerm;index as i; odd as isOdd"
+            [user]="user"
+            [position]="i+1"
+            [isOdd]="isOdd"
+  >
+  </app-card>
+</div>
+
+<ng-template #loadGif>
+  loading....
+</ng-template>

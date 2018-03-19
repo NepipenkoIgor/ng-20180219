@@ -2,34 +2,30 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User, USERS, USERS$} from './users';
 import {Observable} from 'rxjs/Observable';
 import {UsersService} from './users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnDestroy {
 
-  public placeholder = 'Seatch people';
-
-  public users$: Observable<User[]>;
-
-  public constructor(private _usersService: UsersService) {
-
-  }
 
 //  public users: any;
 //  public usersSubscription: Subscription;
 
-  public search(value: string) {
-    // this.text = value;
+  public constructor(private _router: Router) {
+
+    // setTimeout(() => {
+    //   console.log('should go to info');
+    //   this._router.navigate(['info']);
+    // }, 5000);
   }
 
-  public ngOnInit(): void {
-    this.users$ = this._usersService.users$;
-    // this.usersSubscription = this.users$.subscribe((users) => {
-    //   this.users = users;
-    // });
+
+  public search(value: string) {
+    // this.text = value;
   }
 
   public ngOnDestroy() {

@@ -3,6 +3,7 @@ import {delay} from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 
 export interface User {
+  id?: number;
   'profileName': string;
   'firstName': string;
   'surname': string;
@@ -70,6 +71,6 @@ export const USERS: User[] = [{
   'country': 'ru'
 }];
 
-export const  USERS$: Observable<User[]> =  Observable.of(USERS).pipe(
+export const USERS$: Observable<User[]> = Observable.of(USERS).pipe(
   delay(1000)
 );

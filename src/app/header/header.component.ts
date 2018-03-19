@@ -8,6 +8,7 @@ import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {async} from 'rxjs/scheduler/async';
+import {SearchService} from '../common/services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -21,14 +22,11 @@ export class HeaderComponent implements OnInit {
   @Input()
   public placeholder;
 
-  @Output()
-  public search: EventEmitter<string> = new EventEmitter();
-
 
   public logo = 'assets/images/logo.png';
   public width = '50';
 
-  constructor() {
+  constructor(private _searchService: SearchService) {
   }
 
   ngOnInit() {
@@ -51,9 +49,9 @@ export class HeaderComponent implements OnInit {
 
 
     setTimeout(() => {
-      console.log('start');
-      // controledSequence$$.subscribe((item) => console.log(item))
-      console.log('end');
+        console.log('start');
+        // controledSequence$$.subscribe((item) => console.log(item))
+        console.log('end');
       }, 3000
     );
 
@@ -95,7 +93,7 @@ export class HeaderComponent implements OnInit {
 
   @debounce(300)
   public onInput(value: string): void {
-    this.search.emit(value);
+    this._searchService.search = value;
   }
 
   // public getProperty$<T>(source$: Observable<any>, key: string): Observable<T> {

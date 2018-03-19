@@ -13,7 +13,9 @@ export class UsersService {
   }
 
   public get users$(): Observable<User[]> {
-    return this._http.get<User[]>(`${this._baseUrl}participants?key=o5dpbb`);
+    let count = 0;
+    return this._http.get<User[]>(`${this._baseUrl}participants?key=o5dpbb`)
+      .map((users: User[]) => users.map((user: User) => ({...user, id: count++})));
   }
 
 }

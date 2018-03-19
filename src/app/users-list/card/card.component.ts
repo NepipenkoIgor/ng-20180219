@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {User} from '../users';
-import {UsersService} from '../users.service';
+import {User} from '../../users';
+import {UsersService} from '../../users.service';
 
 @Component({
   selector: 'app-card',

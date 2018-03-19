@@ -3,14 +3,22 @@ import {NgModule} from '@angular/core';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
-import {MatInputModule, MatToolbarModule, MatCardModule} from '@angular/material';
+import {MatInputModule, MatToolbarModule, MatCardModule, MatMenuModule, MatButtonModule} from '@angular/material';
 import {HeaderComponent} from './header/header.component';
 import {UsersFilterPipe} from './common/pipes/users-filter.pipe';
-import {CardComponent} from './card/card.component';
+import {CardComponent} from './users-list/card/card.component';
 import {TooltipDirective} from './common/directives/tooltip.directive';
 import {UsersService} from './users.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BASE_URL, BASE_URL_TOKEN} from './config';
+import { InfoComponent } from './info/info.component';
+import {RouterModule} from '@angular/router';
+import { UsersListComponent } from './users-list/users-list.component';
+import {routes} from './routes';
+import {SearchService} from './common/services/search.service';
+import { UsersComponent } from './users-list/users/users.component';
+import { UserComponent } from './users-list/user/user.component';
+import {UserResolveService} from './users-list/user/user-resolve.service';
 
 
 @NgModule({
@@ -19,14 +27,20 @@ import {BASE_URL, BASE_URL_TOKEN} from './config';
     HeaderComponent,
     UsersFilterPipe,
     CardComponent,
-    TooltipDirective
+    TooltipDirective,
+    UsersListComponent,
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule, NoopAnimationsModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
-    HttpClientModule
+    MatMenuModule,
+    MatButtonModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     UsersService,
@@ -40,7 +54,8 @@ import {BASE_URL, BASE_URL_TOKEN} from './config';
       useValue: 'localhost:3000',
       multi: true
     },
-
+    SearchService,
+    UserResolveService
   ],
   bootstrap: [AppComponent]
 })

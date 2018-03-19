@@ -1,8 +1,17 @@
 <mat-toolbar color="primary">
   <span>My Application</span>
   <img [src]="logo" [style.width.px]="width" />
+
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['users']" routerLinkActive="active">Users</button>
+    <button mat-menu-item [routerLink]="['info']" routerLinkActive="active">Info</button>
+  </mat-menu>
+
   <mat-form-field >
     <input matInput #myInput [placeholder]="placeholder"
            (input)="onInput(myInput.value)">
   </mat-form-field>
+
+
 </mat-toolbar>
