@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators, FormArray} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators, FormArray, AsyncValidatorFn} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
 
@@ -18,17 +21,23 @@ export class UserComponent implements OnInit {
   });
 
   constructor(private _activatedRouter: ActivatedRoute,
-              private _fb: FormBuilder) {
+              private _fb: FormBuilder,
+              private _cd: ChangeDetectorRef,
+              private _zone: NgZone,
+  ) {
+
   }
 
   ngOnInit() {
 
     this.formGroup = this._fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(4)]],
+      firstName: ['', Validators.compose([Validators.required, Validators.minLength(4), this.nameValidator])],
       lastName: ['', [Validators.required, Validators.minLength(4)]],
       passwordGroup: this._fb.group({
         password: ['', [Validators.required, Validators.minLength(4)]],
         pconfirm: ['', [Validators.required, Validators.minLength(4)]]
+      }, {
+        asyncValidator: this.asyncEqualValidator
       })
     });
 
@@ -43,6 +52,20 @@ export class UserComponent implements OnInit {
 
   public addEmail(): void {
     (this.formArrayGroup.get('emails') as FormArray).push(new FormControl(''));
+  }
+
+  public nameValidator(control: FormControl): { [key: string]: boolean } | null {
+    const value: string = control.value;
+    const valid: boolean = /^[a-zA-Z]*$/.test(value);
+    return valid
+      ? null
+      : {nospicial: true};
+  }
+
+  public asyncEqualValidator({value}: FormGroup): Observable<{ [key: string]: boolean } | null> {
+    const [first, ...rest] = Object.keys(value || {});
+    const valid = rest.every((v: string) => value[v] = value[first]);
+    return of(valid ? null : {noequal: true}).pipe(delay(5000));
   }
 
 }

@@ -1,3 +1,7 @@
 input.ng-invalid {
   background-color: red;
 }
+
+.ng-pending input {
+  background-color: orange;
+}

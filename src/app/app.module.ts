@@ -11,7 +11,6 @@ import {TooltipDirective} from './common/directives/tooltip.directive';
 import {UsersService} from './users.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BASE_URL, BASE_URL_TOKEN} from './config';
-import {InfoComponent} from './info/info.component';
 import {RouterModule} from '@angular/router';
 import {UsersListComponent} from './users-list/users-list.component';
 import {routes} from './routes';
@@ -20,6 +19,8 @@ import {UsersComponent} from './users-list/users/users.component';
 import {UserComponent} from './users-list/user/user.component';
 import {UserResolveService} from './users-list/user/user-resolve.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NameValidatorDirective } from './users-list/user/name-validator.directive';
+import { AsyncEqualValidatorDirective } from './users-list/user/async-equal-validator.directive';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     TooltipDirective,
     UsersListComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    NameValidatorDirective,
+    AsyncEqualValidatorDirective
   ],
   imports: [
     BrowserModule, NoopAnimationsModule,

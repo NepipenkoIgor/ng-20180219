@@ -7,14 +7,14 @@
 <div  ngForm #f="ngForm">
   <div>
     First Name
-    <input type="text" name="firstName" ngModel required minlength="4">
+    <input type="text" name="firstName" appNameValidator ngModel required minlength="4">
   </div>
   <div>
     Last Name
     <input type="text" ngModel name="lastName" required minlength="4">
   </div>
 
-  <div ngModelGroup="passwordGroup">
+  <div ngModelGroup="passwordGroup" appAsyncEqualValidator>
     <div>
       Password
       <input type="password" name="password" ngModel required minlength="4">
@@ -30,45 +30,47 @@
 <pre>{{f.valid }}</pre>
 
 
-<h3>Reactive</h3>
+<!--<h3>Reactive</h3>-->
 
-<!--<input type="text" [formControl]="formControl" >-->
-<!--{{formControl.valueChanges | async}}-->
-<!--{{formControl.valid}}-->
+<!--&lt;!&ndash;<input type="text" [formControl]="formControl" >&ndash;&gt;-->
+<!--&lt;!&ndash;{{formControl.valueChanges | async}}&ndash;&gt;-->
+<!--&lt;!&ndash;{{formControl.valid}}&ndash;&gt;-->
 
-<div [formGroup]="formGroup">
-  <div>
-    First Name
-    <input type="text" [formControl]="formGroup.get('firstName')" >
-  </div>
-  <div>
-    Last Name
-    <input type="text" formControlName="lastName">
-  </div>
-  <div formGroupName="passwordGroup">
-    <div>
-      Password
-      <input type="password" formControlName="password"  >
-    </div>
-    <div>
-      Confirm Password
-      <input type="password"  formControlName="pconfirm">
-    </div>
-  </div>
-</div>
-<pre>{{formGroup.value | json}}</pre>
-<pre>{{formGroup.valid }}</pre>
+<!--<div [formGroup]="formGroup">-->
+  <!--<div>-->
+    <!--First Name-->
+    <!--<input type="text" [formControl]="formGroup.get('firstName')" >-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--Last Name-->
+    <!--<input type="text" formControlName="lastName">-->
+  <!--</div>-->
+  <!--<div formGroupName="passwordGroup">-->
+    <!--<div>-->
+      <!--Password-->
+      <!--<input type="password" formControlName="password"  >-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--Confirm Password-->
+      <!--<input type="password"  formControlName="pconfirm">-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<pre>{{formGroup.value | json}}</pre>-->
+<!--<pre>{{formGroup.valid }}</pre>-->
+<!--<pre>{{formGroup.get('firstName')?.errors | json }}</pre>-->
+<!--<pre>{{formGroup.get('passwordGroup')?.errors | json }}</pre>-->
+<!--<h3>FormArray</h3>-->
 
-<h3>FormArray</h3>
+<!--<div [formGroup]="formArrayGroup">-->
+  <!--<ul formGroupName="emails">-->
+    <!--<li *ngFor="let e of formArrayGroup.get('emails').controls; index as i">-->
+      <!--<input type="text" [formControl]="e">-->
+    <!--</li>-->
+  <!--</ul>-->
+  <!--<button (click)="addEmail()">Add Email</button>-->
+<!--</div>-->
 
-<div [formGroup]="formArrayGroup">
-  <ul formGroupName="emails">
-    <li *ngFor="let e of formArrayGroup.get('emails').controls; index as i">
-      <input type="text" [formControl]="e">
-    </li>
-  </ul>
-  <button (click)="addEmail()">Add Email</button>
-</div>
+<!--<pre>{{formArrayGroup.value | json}}</pre>-->
+<!--<pre>{{formArrayGroup.valid }}</pre>-->
 
-<pre>{{formArrayGroup.value | json}}</pre>
-<pre>{{formArrayGroup.valid }}</pre>
